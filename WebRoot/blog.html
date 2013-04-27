@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+<title>Blog</title>
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="css/blog.css" />
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</head>
+
+<body data-spy="scroll" data-target=".bs-docs-sidebar">
+
+	<!-- Navbar ================================================== -->
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="brand" href="/">X. Zhang's Website</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li class=""><a href="/logout">Logout</a></li>
+						<li class=""><a href="/">Index</a></li>
+						<li class=""><a href="#">Thesis</a></li>
+						<li class="active"><a href="#">Blog</a></li>
+						<li class=""><a href="#">Scratch</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container jump">
+		<div class="row">
+			<div class="span2 affix">
+				<!-- Contents ================================================== -->
+				<section id="contents">
+					<a id="new-blog-btn" class="btn btn-large btn-primary" href="#">new blog</a>
+				</section>
+			</div>
+
+			<div class="span2"></div>
+
+			<div class="span10">
+				<section id="blog-editor">
+					<form>
+						<fieldset>
+							<input class="input-block-level" type="text" placeholder="Title" />
+							<textarea class="input-block-level" rows="3"></textarea>
+							<button type="submit" class="btn btn-primary">Save</button>
+						</fieldset>
+					</form>
+				</section>
+
+				<!-- Download ================================================== -->
+				<section class="blog-content">
+					<div class="page-header">
+						<h1>1. 下载</h1>
+					</div>
+					<p class="lead">
+						下载之前先检查一下是否准备好了一个代码编辑器(我们推荐使用 <a href="#">Sublime Text 2</a>)
+						，你是否已经掌握了足够的HTML和CSS知识以开展工作。这里我们不详述源码文件，但是它们可以随时被下载。在这里我们只着重介绍使用已经编译好的Bootstrap文件进行入门讲解。
+					</p>
+
+					<div class="row-fluid">
+						<div class="span6">
+							<h2>下载编译好的文件</h2>
+							<p>
+								<strong>快速开始:</strong>立即下载编译好的版本吧，里面已经包含了CSS、JS和图片文件了，而且所有文件已经经过了压缩处理。不过，文档和源码文件不包含哦。
+							</p>
+							<p>
+								<a class="btn btn-large btn-primary" href="#">下载Bootstrap</a>
+							</p>
+						</div>
+						<div class="span6">
+							<h2>下载源码</h2>
+							<p>从GitHub直接下载到的最新版的源码包括CSS、JavaScript的源文件，以及一份文档。</p>
+							<p>
+								<a class="btn btn-large" href="#">下载Bootstrap源码</a>
+							</p>
+						</div>
+					</div>
+				</section>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>
