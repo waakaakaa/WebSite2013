@@ -1,7 +1,5 @@
 package cn.zx.website.domain;
 
-import java.util.Date;
-
 public class User {
 	private int id;
 	private String email;

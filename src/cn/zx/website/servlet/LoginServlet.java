@@ -39,7 +39,6 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher rd = req.getRequestDispatcher("/login.html");
 			rd.forward(req, resp);
 		}
-		return;
 	}
 
 	@Override

@@ -1,17 +1,79 @@
 <!DOCTYPE html>
 <html lang="zh_CN">
 <head>
-<title>Blog</title>
 <link rel="stylesheet" href="css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
-<link rel="stylesheet" href="css/blog.css" />
 <script src="js/jquery-1.7.2.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<title>Blog</title>
+<style type="text/css">
+.jump {
+	padding: 50px 0
+}
+
+body>.navbar .brand {
+	padding-right: 0;
+	padding-left: 0;
+	margin-left: 20px;
+	float: right;
+	font-weight: bold;
+	color: #000;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, .1), 0 0 30px
+		rgba(255, 255, 255, .125);
+	-webkit-transition: all .2s linear;
+	transition: all .2s linear;
+}
+</style>
+<script type="text/javascript">
+	$(function($) {
+		$(".blog-content").show();
+		$("#blog-editor").hide();
+		$("#new-blog-btn").click(function() {
+			$(".blog-content").fadeOut("slow");
+			$("#blog-editor").fadeIn("slow");
+		});
+		$("#cancel-addblog-btn").click(function() {
+			$(".blog-content").fadeIn("slow");
+			$("#blog-editor").fadeOut("slow");
+		});
+		$
+				.ajax({
+					type : "GET",
+					url : "/getblog",
+					dataType : "json",
+					cache : false,
+					success : function(data) {
+						$(".blog-content").empty();
+						var strHTML = "";
+						if ($(data).length == 0) {
+							strHTML += "<div>No blog yet!</div>";
+						} else {
+							for ( var i = data.length - 1; i >= 0; i--) {
+								strHTML += "<p class='label label-success'>"
+										+ ($(data).get(i).createDate.year + 1900)
+										+ "年"
+										+ ($(data).get(i).createDate.month + 1)
+										+ "月" + $(data).get(i).createDate.date
+										+ "日" + $(data).get(i).createDate.hours
+										+ ":"
+										+ $(data).get(i).createDate.minutes
+										+ ":"
+										+ $(data).get(i).createDate.seconds
+										+ "</p>";
+								strHTML += "<div><h1>" + $(data).get(i).title
+										+ "</h1>";
+								strHTML += "<p>" + $(data).get(i).content
+										+ "</p></div>";
+							}
+						}
+						$(".blog-content").html(strHTML);
+					}
+				})
+	});
+</script>
 </head>
 
 <body data-spy="scroll" data-target=".bs-docs-sidebar">
-
-	<!-- Navbar ================================================== -->
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
@@ -26,7 +88,7 @@
 						<li class=""><a href="/logout">Logout</a></li>
 						<li class=""><a href="/">Index</a></li>
 						<li class=""><a href="#">Thesis</a></li>
-						<li class="active"><a href="#">Blog</a></li>
+						<li class="active"><a href="/blog.html">Blog</a></li>
 						<li class=""><a href="#">Scratch</a></li>
 					</ul>
 				</div>
@@ -37,9 +99,9 @@
 	<div class="container jump">
 		<div class="row">
 			<div class="span2 affix">
-				<!-- Contents ================================================== -->
 				<section id="contents">
-					<a id="new-blog-btn" class="btn btn-large btn-primary" href="#">new blog</a>
+					<a id="new-blog-btn" class="btn btn-large btn-primary" href="#">new
+						blog</a>
 				</section>
 			</div>
 
@@ -47,45 +109,18 @@
 
 			<div class="span10">
 				<section id="blog-editor">
-					<form>
+					<form action="addblog" method="post">
 						<fieldset>
-							<input class="input-block-level" type="text" placeholder="Title" />
-							<textarea class="input-block-level" rows="3"></textarea>
+							<input name="title" class="input-block-level" type="text"
+								placeholder="Title" />
+							<textarea name="content" class="input-block-level" rows="3"></textarea>
 							<button type="submit" class="btn btn-primary">Save</button>
+							<button id="cancel-addblog-btn" type="button" class="btn">Cancel</button>
 						</fieldset>
 					</form>
 				</section>
 
-				<!-- Download ================================================== -->
-				<section class="blog-content">
-					<div class="page-header">
-						<h1>1. 下载</h1>
-					</div>
-					<p class="lead">
-						下载之前先检查一下是否准备好了一个代码编辑器(我们推荐使用 <a href="#">Sublime Text 2</a>)
-						，你是否已经掌握了足够的HTML和CSS知识以开展工作。这里我们不详述源码文件，但是它们可以随时被下载。在这里我们只着重介绍使用已经编译好的Bootstrap文件进行入门讲解。
-					</p>
-
-					<div class="row-fluid">
-						<div class="span6">
-							<h2>下载编译好的文件</h2>
-							<p>
-								<strong>快速开始:</strong>立即下载编译好的版本吧，里面已经包含了CSS、JS和图片文件了，而且所有文件已经经过了压缩处理。不过，文档和源码文件不包含哦。
-							</p>
-							<p>
-								<a class="btn btn-large btn-primary" href="#">下载Bootstrap</a>
-							</p>
-						</div>
-						<div class="span6">
-							<h2>下载源码</h2>
-							<p>从GitHub直接下载到的最新版的源码包括CSS、JavaScript的源文件，以及一份文档。</p>
-							<p>
-								<a class="btn btn-large" href="#">下载Bootstrap源码</a>
-							</p>
-						</div>
-					</div>
-				</section>
-
+				<div class="blog-content"></div>
 			</div>
 		</div>
 	</div>
