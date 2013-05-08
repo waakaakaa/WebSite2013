@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
 <script src="js/jquery-1.7.2.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/Chart.min.js"></script>
 <title>Blog</title>
 <style type="text/css">
 .jump {
@@ -25,16 +26,44 @@ body>.navbar .brand {
 }
 </style>
 <script type="text/javascript">
+	var data = {
+		labels : [ "January", "February", "March", "April", "May", "June",
+				"July" ],
+		datasets : [ {
+			fillColor : "rgba(220,220,220,0.5)",
+			strokeColor : "rgba(220,220,220,1)",
+			pointColor : "rgba(220,220,220,1)",
+			pointStrokeColor : "#fff",
+			data : [ 65, 59, 90, 81, 56, 55, 40 ]
+		}, {
+			fillColor : "rgba(151,187,205,0.5)",
+			strokeColor : "rgba(151,187,205,1)",
+			pointColor : "rgba(151,187,205,1)",
+			pointStrokeColor : "#fff",
+			data : [ 28, 48, 40, 19, 96, 27, 100 ]
+		} ]
+	}
+
 	$(function($) {
 		$(".blog-content").show();
 		$("#blog-editor").hide();
+		$("#myChart").hide();
+
 		$("#new-blog-btn").click(function() {
 			$(".blog-content").fadeOut("slow");
 			$("#blog-editor").fadeIn("slow");
+			$("#myChart").hide();
 		});
 		$("#cancel-addblog-btn").click(function() {
 			$(".blog-content").fadeIn("slow");
 			$("#blog-editor").fadeOut("slow");
+		});
+		$("#hour-stat-btn").click(function() {
+			$("#blog-editor").fadeOut("slow");
+			$(".blog-content").fadeOut("slow");
+			$("#myChart").fadeIn("slow");
+			var ctx = $("#myChart").get(0).getContext("2d");
+			new Chart(ctx).Line(data);
 		});
 		$
 				.ajax({
@@ -100,8 +129,12 @@ body>.navbar .brand {
 		<div class="row">
 			<div class="span2 affix">
 				<section id="contents">
-					<a id="new-blog-btn" class="btn btn-large btn-primary" href="#">new
-						blog</a>
+					<ul>
+						<li><a id="new-blog-btn" class="btn btn-large btn-primary"
+							href="#">new blog</a></li>
+						<li><a id="hour-stat-btn" class="btn btn-large btn-primary"
+							href="#">hour stat</a></li>
+					</ul>
 				</section>
 			</div>
 
@@ -121,6 +154,7 @@ body>.navbar .brand {
 				</section>
 
 				<div class="blog-content"></div>
+				<canvas id="myChart" width="1000" height="600"></canvas>
 			</div>
 		</div>
 	</div>

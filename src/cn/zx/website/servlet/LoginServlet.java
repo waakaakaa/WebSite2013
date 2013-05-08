@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cn.zx.website.dao.UserDao;
 import cn.zx.website.dao.impl.UserDaoImpl;
+import cn.zx.website.db.DaoFactory;
 import cn.zx.website.domain.User;
 import cn.zx.website.util.Constants;
 
@@ -26,10 +27,10 @@ public class LoginServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		UserDao userDao = new UserDaoImpl();
+
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
-		User user = userDao.findUserByEmailAndPassword(email, password);
+		User user = DaoFactory.getUserDao().findUserByEmailAndPassword(email, password);
 
 		if (user != null) {
 			req.getSession().setAttribute(Constants.SESSION_USER, user);

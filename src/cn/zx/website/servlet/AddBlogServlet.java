@@ -1,6 +1,7 @@
 package cn.zx.website.servlet;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cn.zx.website.dao.BlogDao;
-import cn.zx.website.dao.impl.BlogDaoImpl;
+import cn.zx.website.db.DaoFactory;
 import cn.zx.website.domain.Blog;
 import cn.zx.website.util.StringUtil;
 
@@ -31,11 +31,12 @@ public class AddBlogServlet extends HttpServlet {
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		Blog blog = new Blog(title, content);
-		log.info("blog --> " + blog);
 
-		if (!StringUtil.empty(title) && !StringUtil.empty(content)) {
-			BlogDao dao = new BlogDaoImpl();
-			dao.create(blog);
+		if (!StringUtil.empty(content)) {
+			if (StringUtil.empty(title)) {
+				blog.setTitle(new Date().toString());
+			}
+			DaoFactory.getBlogDao().create(blog);
 			log.info("blog inserted!");
 		} else {
 			log.info("blog NOT inserted!");

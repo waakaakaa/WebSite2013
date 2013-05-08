@@ -17,6 +17,7 @@ import org.apache.commons.logging.LogFactory;
 
 import cn.zx.website.dao.BlogDao;
 import cn.zx.website.dao.impl.BlogDaoImpl;
+import cn.zx.website.db.DaoFactory;
 import cn.zx.website.domain.Blog;
 
 @SuppressWarnings("serial")
@@ -31,8 +32,7 @@ public class GetBlogServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		BlogDao dao = new BlogDaoImpl();
-		List<Blog> list = dao.findAllBlogs();
+		List<Blog> list = DaoFactory.getBlogDao().findAllBlogs();
 
 		JSONArray array = JSONArray.fromObject(list);
 		PrintWriter out = resp.getWriter();

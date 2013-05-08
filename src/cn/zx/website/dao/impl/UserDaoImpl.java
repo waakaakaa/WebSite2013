@@ -16,6 +16,5 @@ public class UserDaoImpl implements UserDao {
 	public User findUserByEmailAndPassword(String email, String password) {
 		String sql = "SELECT * FROM user WHERE email=? AND password=?";
 		return QueryHelper.read(User.class, sql, email, password);
-		// return new User();
 	}
 }
