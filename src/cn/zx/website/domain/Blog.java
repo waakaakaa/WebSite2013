@@ -5,14 +5,17 @@ import java.sql.Timestamp;
 public class Blog {
 	private int id;
 	private Timestamp createDate;
-	private String title;
 	private String content;
 
 	public Blog() {
 	}
 
-	public Blog(String title, String content) {
-		this.title = title;
+	public Blog(String content) {
+		this.content = content;
+	}
+
+	public Blog(Timestamp createDate, String content) {
+		this.createDate = createDate;
 		this.content = content;
 	}
 
@@ -32,14 +35,6 @@ public class Blog {
 		this.createDate = createDate;
 	}
 
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
 	public String getContent() {
 		return content;
 	}
@@ -50,6 +45,6 @@ public class Blog {
 
 	@Override
 	public String toString() {
-		return "Blog [createDate=" + createDate + ", title=" + title + ", content=" + content + "]";
+		return "Blog [createDate=" + createDate + ", content=" + content + "]";
 	}
 }

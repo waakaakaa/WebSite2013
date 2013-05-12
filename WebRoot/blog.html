@@ -46,59 +46,94 @@ body>.navbar .brand {
 
 	$(function($) {
 		$(".blog-content").show();
-		$("#blog-editor").hide();
 		$("#myChart").hide();
 
-		$("#new-blog-btn").click(function() {
-			$(".blog-content").fadeOut("slow");
-			$("#blog-editor").fadeIn("slow");
-			$("#myChart").hide();
-		});
-		$("#cancel-addblog-btn").click(function() {
-			$(".blog-content").fadeIn("slow");
-			$("#blog-editor").fadeOut("slow");
-		});
-		$("#hour-stat-btn").click(function() {
+		getBlogs(1);
+
+		$("#hourstat").click(function() {
 			$("#blog-editor").fadeOut("slow");
 			$(".blog-content").fadeOut("slow");
+			$("#page").fadeOut("slow");
 			$("#myChart").fadeIn("slow");
 			var ctx = $("#myChart").get(0).getContext("2d");
 			new Chart(ctx).Line(data);
 		});
-		$
-				.ajax({
-					type : "GET",
-					url : "/getblog",
-					dataType : "json",
-					cache : false,
-					success : function(data) {
-						$(".blog-content").empty();
-						var strHTML = "";
-						if ($(data).length == 0) {
-							strHTML += "<div>No blog yet!</div>";
-						} else {
-							for ( var i = data.length - 1; i >= 0; i--) {
-								strHTML += "<p class='label label-success'>"
-										+ ($(data).get(i).createDate.year + 1900)
-										+ "年"
-										+ ($(data).get(i).createDate.month + 1)
-										+ "月" + $(data).get(i).createDate.date
-										+ "日" + $(data).get(i).createDate.hours
-										+ ":"
-										+ $(data).get(i).createDate.minutes
-										+ ":"
-										+ $(data).get(i).createDate.seconds
-										+ "</p>";
-								strHTML += "<div><h1>" + $(data).get(i).title
-										+ "</h1>";
-								strHTML += "<p>" + $(data).get(i).content
-										+ "</p></div>";
-							}
-						}
-						$(".blog-content").html(strHTML);
-					}
-				})
+
+		$("#search").click(function() {
+			searchBlog($("#content").val());
+			alert($("#content").val());
+			$("#page").fadeOut("slow");
+		});
 	});
+
+	function searchBlog(keyword) {
+		$.ajax({
+			type : "GET",
+			url : "/searchblog",
+			data : "keyword=" + keyword,
+			dataType : "json",
+			cache : false,
+			success : function(data) {
+				$(".blog-content").empty();
+				var strHTML = "";
+				if ($(data).length == 0) {
+					strHTML += "<div>No blog found!</div>";
+				} else {
+					for ( var i = 0; i < data.length; i++) {
+						strHTML += "<p class='label label-success'>"
+								+ ($(data).get(i).createDate.year + 1900) + "年"
+								+ ($(data).get(i).createDate.month + 1) + "月"
+								+ $(data).get(i).createDate.date + "日"
+								+ $(data).get(i).createDate.hours + "点"
+								+ $(data).get(i).createDate.minutes + "分"
+								+ $(data).get(i).createDate.seconds + "秒"
+								+ "</p>";
+						strHTML += "<p>" + $(data).get(i).content
+								+ "</p></div>";
+					}
+				}
+				$(".blog-content").html(strHTML);
+			}
+		});
+	}
+
+	function getBlogs(page) {
+		$.ajax({
+			type : "GET",
+			url : "/getblog",
+			data : "page=" + page,
+			dataType : "json",
+			cache : false,
+			success : function(data) {
+				$(".blog-content").empty();
+				var strHTML = "";
+				if ($(data).length == 0) {
+					strHTML += "<div>No blog yet!</div>";
+				} else {
+					for ( var i = 0; i < data.length; i++) {
+						strHTML += "<p class='label label-success'>"
+								+ ($(data).get(i).createDate.year + 1900) + "年"
+								+ ($(data).get(i).createDate.month + 1) + "月"
+								+ $(data).get(i).createDate.date + "日"
+								+ $(data).get(i).createDate.hours + "点"
+								+ $(data).get(i).createDate.minutes + "分"
+								+ $(data).get(i).createDate.seconds + "秒"
+								+ "</p>";
+						strHTML += "<p>" + $(data).get(i).content
+								+ "</p></div>";
+					}
+				}
+				$(".blog-content").html(strHTML);
+			}
+		});
+		for ( var j = 1; j <= 5; j++) {
+			$("#page > ul li:nth-child(" + j + ")").removeClass("disabled");
+			$("#page > ul li:nth-child(" + j + ")").attr("onclick",
+					"getBlogs('" + j + "')");
+		}
+		$("#page > ul li:nth-child(" + page + ")").addClass("disabled");
+		$("#page > ul li:nth-child(" + page + ")").removeAttr("onclick");
+	}
 </script>
 </head>
 
@@ -127,34 +162,29 @@ body>.navbar .brand {
 
 	<div class="container jump">
 		<div class="row">
-			<div class="span2 affix">
-				<section id="contents">
-					<ul>
-						<li><a id="new-blog-btn" class="btn btn-large btn-primary"
-							href="#">new blog</a></li>
-						<li><a id="hour-stat-btn" class="btn btn-large btn-primary"
-							href="#">hour stat</a></li>
-					</ul>
-				</section>
-			</div>
+			<section id="blog-editor">
+				<form action="addblog" method="post">
+					<fieldset>
+						<textarea id="content" name="content" class="input-block-level"
+							rows="3"></textarea>
+						<button type="submit" class="btn btn-primary">Save</button>
+						<button type="button" class="btn" id="search">Search</button>
+						<button type="button" class="btn" id="hourstat">HourStat</button>
+					</fieldset>
+				</form>
+			</section>
 
-			<div class="span2"></div>
-
-			<div class="span10">
-				<section id="blog-editor">
-					<form action="addblog" method="post">
-						<fieldset>
-							<input name="title" class="input-block-level" type="text"
-								placeholder="Title" />
-							<textarea name="content" class="input-block-level" rows="3"></textarea>
-							<button type="submit" class="btn btn-primary">Save</button>
-							<button id="cancel-addblog-btn" type="button" class="btn">Cancel</button>
-						</fieldset>
-					</form>
-				</section>
-
-				<div class="blog-content"></div>
-				<canvas id="myChart" width="1000" height="600"></canvas>
+			<div class="blog-content"></div>
+			<canvas id="myChart" width="1000" height="600"></canvas>
+			<div id="page"
+				class="pagination pagination-large pagination-centered">
+				<ul>
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+				</ul>
 			</div>
 		</div>
 	</div>

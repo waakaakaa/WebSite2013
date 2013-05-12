@@ -10,7 +10,6 @@ CREATE TABLE `user` (
 CREATE TABLE `blog` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`createDate` datetime NOT NULL,
-	`title` varchar(50) NOT NULL,
 	`content` varchar(500) NOT NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

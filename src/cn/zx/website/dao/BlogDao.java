@@ -8,4 +8,8 @@ public interface BlogDao {
 	public void create(Blog blog);
 
 	public List<Blog> findAllBlogs();
+
+	public List<Blog> findBlogs(int page);
+
+	public List<Blog> searchBlogs(String keyword);
 }

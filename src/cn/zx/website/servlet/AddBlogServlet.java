@@ -1,7 +1,6 @@
 package cn.zx.website.servlet;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,14 +27,10 @@ public class AddBlogServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String title = req.getParameter("title");
 		String content = req.getParameter("content");
-		Blog blog = new Blog(title, content);
+		Blog blog = new Blog(content);
 
 		if (!StringUtil.empty(content)) {
-			if (StringUtil.empty(title)) {
-				blog.setTitle(new Date().toString());
-			}
 			DaoFactory.getBlogDao().create(blog);
 			log.info("blog inserted!");
 		} else {

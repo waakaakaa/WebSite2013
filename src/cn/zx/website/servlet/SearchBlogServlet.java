@@ -19,9 +19,9 @@ import cn.zx.website.db.DaoFactory;
 import cn.zx.website.domain.Blog;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/getblog")
-public class GetBlogServlet extends HttpServlet {
-	private final static Log log = LogFactory.getLog(GetBlogServlet.class);
+@WebServlet(urlPatterns = "/searchblog")
+public class SearchBlogServlet extends HttpServlet {
+	private final static Log log = LogFactory.getLog(SearchBlogServlet.class);
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,14 +30,15 @@ public class GetBlogServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String page = req.getParameter("page");
-		log.info("page = " + page);
-		List<Blog> list = DaoFactory.getBlogDao().findBlogs(Integer.valueOf(page));
+		String keyword = req.getParameter("keyword");
+		log.info("keyword = " + keyword);
 
+		List<Blog> list = DaoFactory.getBlogDao().searchBlogs(keyword);
 		JSONArray array = JSONArray.fromObject(list);
 		PrintWriter out = resp.getWriter();
 		out.println(array.toString());
 		out.flush();
 		out.close();
 	}
+
 }
