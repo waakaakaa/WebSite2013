@@ -10,7 +10,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.queryparser.classic.ParseException;
@@ -25,7 +25,6 @@ import org.apache.lucene.util.Version;
 import cn.zx.website.dao.BlogDao;
 import cn.zx.website.db.QueryHelper;
 import cn.zx.website.domain.Blog;
-import cn.zx.website.servlet.SearchBlogServlet;
 import cn.zx.website.util.Constants;
 
 public class BlogDaoImpl implements BlogDao {
@@ -52,7 +51,7 @@ public class BlogDaoImpl implements BlogDao {
 	public List<Blog> searchBlogs(String keyword) {
 		List<Blog> blogs = new ArrayList<>();
 		try {
-			Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_CURRENT);
+			Analyzer analyzer = new SmartChineseAnalyzer(Version.LUCENE_CURRENT);
 			Directory directory = FSDirectory.open(new File(Constants.INDEX_DIRECTORY_OF_BLOG));
 			DirectoryReader ireader = DirectoryReader.open(directory);
 			IndexSearcher isearcher = new IndexSearcher(ireader);

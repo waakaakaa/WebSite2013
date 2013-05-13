@@ -1,1 +1,1 @@
-This is an advanced version of the WebSite repository. It uses bootstrap as the front side framework. It is now running in my RPi server.
+This is a website running in my RPi server.

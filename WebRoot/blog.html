@@ -61,7 +61,6 @@ body>.navbar .brand {
 
 		$("#search").click(function() {
 			searchBlog($("#content").val());
-			alert($("#content").val());
 			$("#page").fadeOut("slow");
 		});
 	});
@@ -151,9 +150,10 @@ body>.navbar .brand {
 					<ul class="nav">
 						<li class=""><a href="/logout">Logout</a></li>
 						<li class=""><a href="/">Index</a></li>
-						<li class=""><a href="#">Thesis</a></li>
+						<li class=""><a href="/agenda.html">Agenda</a></li>
+						<li class=""><a href="/thesis.html">Thesis</a></li>
 						<li class="active"><a href="/blog.html">Blog</a></li>
-						<li class=""><a href="#">Scratch</a></li>
+						<li class=""><a href="/qwi.html">QWI</a></li>
 					</ul>
 				</div>
 			</div>
@@ -162,30 +162,34 @@ body>.navbar .brand {
 
 	<div class="container jump">
 		<div class="row">
-			<section id="blog-editor">
-				<form action="addblog" method="post">
-					<fieldset>
-						<textarea id="content" name="content" class="input-block-level"
-							rows="3"></textarea>
-						<button type="submit" class="btn btn-primary">Save</button>
-						<button type="button" class="btn" id="search">Search</button>
-						<button type="button" class="btn" id="hourstat">HourStat</button>
-					</fieldset>
-				</form>
-			</section>
+			<div class="span1"></div>
+			<div class="span10">
+				<section id="blog-editor">
+					<form action="addblog" method="post">
+						<fieldset>
+							<textarea id="content" name="content" class="input-block-level"
+								rows="3"></textarea>
+							<button type="submit" class="btn btn-primary">Save</button>
+							<button type="button" class="btn" id="search">Search</button>
+							<button type="button" class="btn" id="hourstat">HourStat</button>
+						</fieldset>
+					</form>
+				</section>
 
-			<div class="blog-content"></div>
-			<canvas id="myChart" width="1000" height="600"></canvas>
-			<div id="page"
-				class="pagination pagination-large pagination-centered">
-				<ul>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-				</ul>
+				<div class="blog-content"></div>
+				<canvas id="myChart" width="1000" height="600"></canvas>
+				<div id="page"
+					class="pagination pagination-large pagination-centered">
+					<ul>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+					</ul>
+				</div>
 			</div>
+			<div class="span1"></div>
 		</div>
 	</div>
 </body>
