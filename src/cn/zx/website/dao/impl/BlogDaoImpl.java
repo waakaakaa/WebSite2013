@@ -43,7 +43,6 @@ public class BlogDaoImpl implements BlogDao {
 
 	public List<Blog> findBlogs(int page) {
 		String sql = "SELECT * FROM blog ORDER BY createDate DESC";
-		;
 		return QueryHelper.query_slice(Blog.class, sql, page, Constants.BLOG_PAGE_COUNT, null);
 	}
 
