@@ -9,4 +9,5 @@ public class Constants {
 	public static final double ELECTRON_MASS = 9.10938291e-31;
 	public static final double VACUUM_PERMITTIVITY = 8.854187817e-12;
 	public static final double STEP = 0.1e-9;
+	public static final double H_BAR = 1.05457173e-34;
 }

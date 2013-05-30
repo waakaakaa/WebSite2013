@@ -31,6 +31,7 @@ body>.navbar .brand {
 	var chart;
 	var chart2;
 	$(function() {
+		plotWeather();
 		getWeather();
 	});
 	function plotWeather() {
@@ -40,7 +41,7 @@ body>.navbar .brand {
 				renderTo : 'temperature'
 			},
 			title : {
-				text : 'Temperature in dorm'
+				text : 'Temperature in dorm and outsite'
 			},
 			subtitle : {
 				text : 'in the latest 24 hours'
@@ -66,12 +67,10 @@ body>.navbar .brand {
 			},
 			series : [ {
 				name : 'In dorm',
-				data : [ [ Date.UTC(2013, 05, 20, 2, 24, 25), 26 ],
-						[ Date.UTC(2013, 05, 20, 1, 19, 22), 25 ],
-						[ Date.UTC(2013, 05, 20, 0, 49, 21), 25 ],
-						[ Date.UTC(2013, 05, 19, 6, 20, 25), 25 ],
-						[ Date.UTC(2013, 05, 19, 5, 50, 25), 25 ],
-						[ Date.UTC(2013, 05, 19, 2, 20, 25), 25 ] ]
+				data : []
+			}, {
+				name : 'Hangzhou',
+				data : []
 			} ]
 		});
 		chart2 = new Highcharts.Chart({
@@ -80,7 +79,7 @@ body>.navbar .brand {
 				renderTo : 'humidity'
 			},
 			title : {
-				text : 'Humidity in dorm'
+				text : 'Humidity in dorm and outsite'
 			},
 			subtitle : {
 				text : 'in the latest 24 hours'
@@ -106,12 +105,10 @@ body>.navbar .brand {
 			},
 			series : [ {
 				name : 'In dorm',
-				data : [ [ Date.UTC(2013, 05, 20, 2, 24, 25), 26 ],
-						[ Date.UTC(2013, 05, 20, 1, 19, 22), 25 ],
-						[ Date.UTC(2013, 05, 20, 0, 49, 21), 25 ],
-						[ Date.UTC(2013, 05, 19, 6, 20, 25), 25 ],
-						[ Date.UTC(2013, 05, 19, 5, 50, 25), 25 ],
-						[ Date.UTC(2013, 05, 19, 2, 20, 25), 25 ] ]
+				data : []
+			}, {
+				name : 'Hangzhou',
+				data : []
 			} ]
 		});
 	}
@@ -144,9 +141,40 @@ body>.navbar .brand {
 								$(data).get(i).humidity);
 					}
 				}
-				plotWeather();
 				chart.series[0].setData(tArray);
 				chart2.series[0].setData(tArray2);
+			}
+		});
+		$.ajax({
+			type : "GET",
+			url : "/getweatherhz",
+			dataType : "json",
+			cache : false,
+			success : function(data) {
+				var tArray = new Array(data.length);
+				var tArray2 = new Array(data.length);
+				if ($(data).length != 0) {
+					for ( var i = 0; i < data.length; i++) {
+						tArray[i] = new Array(Date.UTC(
+								$(data).get(i).createDate.year + 1900, $(data)
+										.get(i).createDate.month + 1, $(data)
+										.get(i).createDate.date,
+								$(data).get(i).createDate.hours,
+								$(data).get(i).createDate.minutes, $(data).get(
+										i).createDate.seconds),
+								$(data).get(i).temperature);
+						tArray2[i] = new Array(Date.UTC(
+								$(data).get(i).createDate.year + 1900, $(data)
+										.get(i).createDate.month + 1, $(data)
+										.get(i).createDate.date,
+								$(data).get(i).createDate.hours,
+								$(data).get(i).createDate.minutes, $(data).get(
+										i).createDate.seconds),
+								$(data).get(i).humidity);
+					}
+				}
+				chart.series[1].setData(tArray);
+				chart2.series[1].setData(tArray2);
 			}
 		});
 	}

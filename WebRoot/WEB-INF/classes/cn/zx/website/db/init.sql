@@ -23,3 +23,12 @@ CREATE TABLE `weather` (
   `temperature` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `weather_hz` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `createDate` datetime DEFAULT NULL,
+  `humidity` tinyint(4) DEFAULT NULL,
+  `temperature` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `createDate` (`createDate`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8

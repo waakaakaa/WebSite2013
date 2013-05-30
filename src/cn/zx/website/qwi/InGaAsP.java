@@ -36,87 +36,87 @@ public class InGaAsP implements Semiconductor {
 	}
 
 	@Override
-	public double bandOffsetSplittingRatio(double x, double y) {
-		return 1.5;
+	public double bandOffsetSplittingRatioForX() {
+		return 0.6;
 	}
 
 	@Override
-	public double energyBandGap(double x, double y) {
+	public double energyBandGap() {
 		double val = 1.35 - 1.17 * y + 0.668 * (1 - x) - 0.069 * y * (1 - x) + 0.18 * y * y + 0.03 * (1 - x) * y * y + 0.758 * (1 - x) * (1 - x) - 0.322 * y * (1 - x) * (1 - x);
 		return val * ELECTRON_CHARGE;
 	}
 
 	@Override
-	public double spinOrbitSplitting(double x, double y) {
+	public double spinOrbitSplitting() {
 		return ELECTRON_CHARGE * playWithXY(0.34, 0.43, 0.1, 0.1, x, y);
 	}
 
 	@Override
-	public double electronEffectiveMass(double x, double y) {
+	public double electronEffectiveMass() {
 		return ELECTRON_MASS * playWithXY(0.0632, 0.0213, 0.17, 0.077, x, y);
 	}
 
 	@Override
-	public double heavyHoleEffectiveMassPerpendicularToQwLayer(double x, double y) {
+	public double heavyHoleEffectiveMassPerpendicularToQwLayer() {
 		return ELECTRON_MASS * playWithXY(0.5, 0.41, 0.54, 0.12, x, y);
 	}
 
 	@Override
-	public double lightHoleEffectiveMassParallelToQwLayer(double x, double y) {
+	public double lightHoleEffectiveMassParallelToQwLayer() {
 		return ELECTRON_MASS * playWithXY(0.23, 0.082, 0.34, 0.29, x, y);
 	}
 
 	@Override
-	public double heavyHoleEffectiveMassParallelToQwLayer(double x, double y) {
+	public double heavyHoleEffectiveMassParallelToQwLayer() {
 		return ELECTRON_MASS * playWithXY(0.11, 0.031, 0.19, 0.15, x, y);
 	}
 
 	@Override
-	public double lightHoleEffectiveMassPerpendicularToQwLayer(double x, double y) {
+	public double lightHoleEffectiveMassPerpendicularToQwLayer() {
 		return ELECTRON_MASS * playWithXY(0.088, 0.024, 0.16, 0.12, x, y);
 	}
 
 	@Override
-	public double latticeConstant(double x, double y) {
+	public double latticeConstant() {
 		double val = playWithXY(5.6533, 6.0584, 5.4512, 5.8688, x, y);
 		return val / 1e-10;// A --> m
 	}
 
 	@Override
-	public double elasticStiffnessConstantC11(double x, double y) {
+	public double elasticStiffnessConstantC11() {
 		double val = playWithXY(11.8, 8.329, 14.12, 10.22, x, y);
 		return val * 10e11 * 10e-5 / 1e-4;// 10^11dyn/cm^2 --> N/m^2
 	}
 
 	@Override
-	public double elasticStiffnessConstantC12(double x, double y) {
+	public double elasticStiffnessConstantC12() {
 		double val = playWithXY(5.38, 4.526, 6.253, 5.76, x, y);
 		return val * 10e11 * 10e-5 / 1e-4;// 10^11dyn/cm^2 --> N/m^2;
 	}
 
 	@Override
-	public double hydrostaticPressureCoefficient(double x, double y) {
+	public double hydrostaticPressureCoefficient() {
 		double val = playWithXY(11.5, 10, 11, 8.5, x, y);
 		return val * 10e-6 * ELECTRON_CHARGE / 10e5;// 10^-6eV/bar --> J/Pa;
 	}
 
 	@Override
-	public double shearDeformationPotential(double x, double y) {
+	public double shearDeformationPotential() {
 		return ELECTRON_CHARGE * playWithXY(-1.7, -1.8, -1.5, -2, x, y);
 	}
 
 	@Override
-	public double dielectricFunction(double x, double y) {
+	public double dielectricFunction() {
 		return VACUUM_PERMITTIVITY * playWithXY(0.11, 0.031, 0.19, 0.15, x, y);
 	}
 
 	@Override
-	public double renewedStrengthTransitions(double x, double y) {
+	public double renewedStrengthTransitions() {
 		return 8.4 - 3.4 * y;
 	}
 
 	@Override
-	public double nondispersionContribution(double x, double y) {
+	public double nondispersionContribution() {
 		return 6.6 + 3.4 * y;
 	}
 

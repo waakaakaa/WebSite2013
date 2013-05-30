@@ -13,5 +13,11 @@ public class WeatherDaoImpl implements WeatherDao {
 		String sql = "select * from weather where createDate >= now()- interval 1 day";
 		return QueryHelper.query(Weather.class, sql, null);
 	}
+	
+	@Override
+	public List<Weather> getWeathersOfHangzhouInOneDay() {
+		String sql = "select * from weather_hz where createDate >= now()- interval 1 day";
+		return QueryHelper.query(Weather.class, sql, null);
+	}
 
 }

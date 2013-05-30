@@ -1,4 +1,4 @@
-package cn.zx.website.test;
+package cn.zx.website.db;
 
 import cn.zx.website.dao.impl.UserDaoImpl;
 import cn.zx.website.domain.User;

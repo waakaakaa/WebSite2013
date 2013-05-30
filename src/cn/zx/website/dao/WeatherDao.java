@@ -6,4 +6,6 @@ import cn.zx.website.domain.Weather;
 
 public interface WeatherDao {
 	public List<Weather> getWeathersInOneDay();
+
+	public List<Weather> getWeathersOfHangzhouInOneDay();
 }
