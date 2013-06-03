@@ -1,4 +1,4 @@
-package cn.zx.website.algorithm;
+package cn.zx.website.algorithm.sort;
 
 import java.util.Arrays;
 
