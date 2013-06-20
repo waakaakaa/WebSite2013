@@ -11,6 +11,12 @@ public class Weather {
 	public Weather() {
 	}
 
+	public Weather(Timestamp createDate, int humidity, int temperature) {
+		this.createDate = createDate;
+		this.humidity = humidity;
+		this.temperature = temperature;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -41,5 +47,12 @@ public class Weather {
 
 	public void setTemperature(int temperature) {
 		this.temperature = temperature;
+	}
+
+	@Override
+	public String toString() {
+		return "Weather [id=" + id + ", createDate=" + createDate
+				+ ", humidity=" + humidity + ", temperature=" + temperature
+				+ "]";
 	}
 }

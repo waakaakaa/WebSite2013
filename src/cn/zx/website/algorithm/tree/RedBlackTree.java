@@ -1,11 +1,12 @@
 package cn.zx.website.algorithm.tree;
 
-public class BinarySearchTree{
+public class RedBlackTree {
 	public class Node {
 		public double key;
 		public Node left;
 		public Node right;
 		public Node parent;
+		public Color color;
 
 		public Node(double key) {
 			this.key = key;
@@ -24,9 +25,16 @@ public class BinarySearchTree{
 			if (parent != null) {
 				sb.append(", parent=" + parent.key);
 			}
+			if (color != null) {
+				sb.append(", color=" + color.toString());
+			}
 			sb.append("]");
 			return sb.toString();
 		}
+	}
+
+	public enum Color {
+		RED, BLACK;
 	}
 
 	protected Node root;
@@ -108,81 +116,51 @@ public class BinarySearchTree{
 		return y;
 	}
 
-	public void insert(double key) {
-		Node z = new Node(key);
-		Node y = null;
-		Node x = root;
-		while (x != null) {
-			y = x;
-			if (z.key < x.key) {
-				x = x.left;
-			} else {
-				x = x.right;
-			}
+	private void leftRotate(double key) {
+		Node x = search(key);
+		Node y = x.right;
+		x.right = y.left;
+		if (y.left != null) {
+			y.left.parent = x;
 		}
-		z.parent = y;
-		if (y == null) {
-			root = z;
-		} else if (z.key < y.key) {
-			y.left = z;
+		y.parent = x.parent;
+		if (x.parent == null) {
+			root = y;
+		} else if (x == x.parent.left) {
+			x.parent.left = y;
 		} else {
-			y.right = z;
+			x.parent.right = y;
 		}
+		y.left = x;
+		x.parent = y;
+	}
+
+	private void rightRotate(double key) {
+		Node x = search(key);
+		Node y = x.left;
+		x.left = y.right;
+		if (y.right != null) {
+			y.right.parent = x;
+		}
+		y.parent = x.parent;
+		if (x.parent == null) {
+			root = y;
+		} else if (x == x.parent.right) {
+			x.parent.right = y;
+		} else {
+			x.parent.left = y;
+		}
+		y.right = x;
+		x.parent = y;
+	}
+
+	public void insert(double key) {
+		// TODO Auto-generated method stub
+
 	}
 
 	public void delete(double key) {
-		Node z = iterativeSearch(key);
-		Node y = null;
-		Node x = null;
-		if (z.left == null || z.right == null) {
-			y = z;
-		} else {
-			y = successor(z);
-		}
-		if (y.left != null) {
-			x = y.left;
-		} else {
-			x = y.right;
-		}
-		if (x != null) {
-			x.parent = y.parent;
-		}
-		if (y.parent == null) {
-			root = x;
-		} else if (y == y.parent.left) {
-			y.parent.left = x;
-		} else {
-			y.parent.right = x;
-		}
-		if (y != z) {
-			z.key = y.key;
+		// TODO Auto-generated method stub
 
-		}
-	}
-
-	public static void main(String[] args) {
-		BinarySearchTree bst = new BinarySearchTree();
-		bst.insert(1);
-		bst.insert(10);
-		bst.insert(4);
-		bst.insert(3);
-		bst.insert(8);
-		bst.insert(2);
-		bst.insert(11);
-		bst.insert(100);
-		bst.inorderWalk();
-		// System.out.println("-----------------");
-		// BinarySearchTree.Node node1 = bst.search(100);
-		// System.out.println(node1.key);
-		// BinarySearchTree.Node node2 = bst.iterativeSearch(100);
-		// System.out.println(node2.key);
-		// System.out.println("-----------------");
-		// System.out.println(bst.minimum());
-		// System.out.println(bst.maximum());
-		System.out.println("-----------------");
-		System.out.println(bst.successor(bst.search(4)).key);
-		System.out.println("-----------------");
-		bst.delete(4);
-		bst.inorderWalk();
 	}
 }
