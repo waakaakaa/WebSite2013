@@ -6,12 +6,12 @@ public class ZJU88Thread {
 	private int id;
 	private String title;
 	private String href;
-	private Timestamp timestamp;
+	private Timestamp createDate;
 
 	public ZJU88Thread(String title, String href, Timestamp timestamp) {
 		this.title = title;
 		this.href = href;
-		this.timestamp = timestamp;
+		this.createDate = timestamp;
 	}
 
 	public int getId() {
@@ -38,17 +38,17 @@ public class ZJU88Thread {
 		this.href = href;
 	}
 
-	public Timestamp getTimestamp() {
-		return timestamp;
+	public Timestamp getCreateDate() {
+		return createDate;
 	}
 
-	public void setTimestamp(Timestamp timestamp) {
-		this.timestamp = timestamp;
+	public void setCreateDate(Timestamp timestamp) {
+		this.createDate = timestamp;
 	}
 
 	@Override
 	public String toString() {
 		return "Thread [id=" + id + ", title=" + title + ", href=" + href
-				+ ", timestamp=" + timestamp + "]";
+				+ ", createDate=" + createDate + "]";
 	}
 }

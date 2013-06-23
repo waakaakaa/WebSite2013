@@ -1,10 +1,13 @@
 package cn.zx.website.timertask;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -16,15 +19,22 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import cn.zx.website.db.DaoFactory;
 import cn.zx.website.domain.ZJU88Thread;
+import cn.zx.website.util.StringUtil;
 
 public class Get88WorkTimerTask extends TimerTask {
 	private static final String _BOARD_WORK = "http://www.zju88.org/agent/board.do?name=Work&mode=0&page=0";
+	private final static Log log = LogFactory.getLog(Get88WorkTimerTask.class);
 
 	@Override
 	public void run() {
 		String html = get();
 		List<ZJU88Thread> list = parseHtml(html);
+		for (ZJU88Thread thread : list) {
+			log.info("ready to insert thread:" + thread);
+			DaoFactory.getZJU88ThreadDao().createWorkThread(thread);
+		}
 	}
 
 	private static String get() {
@@ -56,10 +66,13 @@ public class Get88WorkTimerTask extends TimerTask {
 			Elements ets = element.getElementsByTag("tr");
 			for (Element e : ets) {
 				String title = parseTitle(e.getElementsByClass("title").text());
-				String href = e.getElementsByTag("a").attr("href");
-
-				System.out.println(e.getElementsByClass("time").text());
-				System.out.println();
+				if (!StringUtil.empty(title)) {
+					String href = e.getElementsByTag("a").attr("href");
+					Timestamp timestamp = parseTime(e
+							.getElementsByClass("time").text());
+					ZJU88Thread thread = new ZJU88Thread(title, href, timestamp);
+					list.add(thread);
+				}
 			}
 		}
 		return list;
@@ -71,5 +84,13 @@ public class Get88WorkTimerTask extends TimerTask {
 			return t;
 		}
 		return t.split("\\[")[0].trim();
+	}
+
+	private static Timestamp parseTime(String time) {
+		return Timestamp.valueOf(time + ":00");
+	}
+
+	public static void main(String[] args) {
+		new Get88WorkTimerTask().run();
 	}
 }

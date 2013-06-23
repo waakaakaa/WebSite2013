@@ -11,6 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cn.zx.website.db.DBManager;
+import cn.zx.website.timertask.Get88WorkTimerTask;
 import cn.zx.website.timertask.GetHzWeatherTimerTask;
 
 @SuppressWarnings("serial")
@@ -27,7 +28,9 @@ public class InitServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		// new Timer().schedule(new BlogIndexTimerTask(), 0, 1000 * 60 * 15);
-		new Timer().schedule(new GetHzWeatherTimerTask(), 0, 1000 * 60 * 30);
+		// new Timer().schedule(new GetHzWeatherTimerTask(), 0, 1000 * 60 * 30);
+		new Timer().schedule(new Get88WorkTimerTask(), 1000 * 60,
+				1000 * 60 * 10);
 		log.info("================= website finishes loading =================");
 	}
 }

@@ -32,3 +32,12 @@ CREATE TABLE `weather_hz` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `createDate` (`createDate`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `zju88_work_thread` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) DEFAULT NULL,
+  `href` varchar(100) DEFAULT NULL,
+  `createDate` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `href` (`href`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
