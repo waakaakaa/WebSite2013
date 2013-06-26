@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="css/top.css" />
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<title>Thread</title>
+<script type="text/javascript">
+	$(function($) {
+		getBlogs(-1);
+	});
+
+	function getBlogs(page) {
+		$
+				.ajax({
+					type : "GET",
+					url : "/get88workthread",
+					data : "page=" + page,
+					dataType : "json",
+					cache : false,
+					success : function(data) {
+						if ($(data).length > 0) {
+							$("#here").empty();
+							var strHTML = "";
+							for ( var i = 0; i < data.length; i++) {
+								var btn1 = "<button class='btn btn-mini' type='button'>未收藏</button>";
+								if ($(data).get(i).collected == 1) {
+									btn1 = "<button class='btn btn-mini btn-primary' type='button'>已收藏</button>";
+								}
+								var btn2 = "<button class='btn btn-mini' type='button'>未删除</button>";
+								if ($(data).get(i).deleted == 1) {
+									btn2 = "<button class='btn btn-mini btn-primary' type='button'>已删除</button>";
+								}
+								strHTML += "<tr><td><a href='http://www.zju88.org/agent/"
+										+ $(data).get(i).href
+										+ "' target='_blank'>"
+										+ $(data).get(i).title
+										+ "</td><td>"
+										+ ($(data).get(i).createDate.year + 1900)
+										+ "-"
+										+ ($(data).get(i).createDate.month + 1)
+										+ "-"
+										+ $(data).get(i).createDate.date
+										+ " "
+										+ $(data).get(i).createDate.hours
+										+ ":"
+										+ $(data).get(i).createDate.minutes
+										+ "</td><td>"
+										+ btn1
+										+ "&nbsp"
+										+ btn2
+										+ "</td></tr>";
+							}
+							$("#here").html(strHTML);
+						}
+					}
+				});
+	}
+</script>
+</head>
+
+<body data-spy="scroll" data-target=".bs-docs-sidebar">
+	<script src="js/top.js"></script>
+
+	<div class="container jump">
+		<div class="row">
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>主题</th>
+						<th>发表时间</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody id="here">
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

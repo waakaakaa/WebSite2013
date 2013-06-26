@@ -32,4 +32,9 @@ if (url.indexOf('/blog.html') > 0) {
 } else {
 	document.write('<li><a href="/blog.html">Blog</a></li>');
 }
+if (url.indexOf('/thread.html') > 0) {
+	document.write('<li class="active"><a href="/thread.html">Thread</a></li>');
+} else {
+	document.write('<li><a href="/thread.html">Thread</a></li>');
+}
 document.write('</ul></div></div></div></div>');

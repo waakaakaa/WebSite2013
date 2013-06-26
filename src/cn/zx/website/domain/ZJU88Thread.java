@@ -7,6 +7,12 @@ public class ZJU88Thread {
 	private String title;
 	private String href;
 	private Timestamp createDate;
+	private boolean collected;
+	private boolean deleted;
+
+	public ZJU88Thread() {
+
+	}
 
 	public ZJU88Thread(String title, String href, Timestamp timestamp) {
 		this.title = title;
@@ -42,13 +48,30 @@ public class ZJU88Thread {
 		return createDate;
 	}
 
-	public void setCreateDate(Timestamp timestamp) {
-		this.createDate = timestamp;
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
+	}
+
+	public boolean isCollected() {
+		return collected;
+	}
+
+	public void setCollected(boolean collected) {
+		this.collected = collected;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 
 	@Override
 	public String toString() {
-		return "Thread [id=" + id + ", title=" + title + ", href=" + href
-				+ ", createDate=" + createDate + "]";
+		return "ZJU88Thread [id=" + id + ", title=" + title + ", href=" + href
+				+ ", createDate=" + createDate + ", collected=" + collected
+				+ ", deleted=" + deleted + "]";
 	}
 }
