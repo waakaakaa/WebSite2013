@@ -38,6 +38,8 @@ CREATE TABLE `zju88_work_thread` (
   `title` varchar(50) DEFAULT NULL,
   `href` varchar(100) DEFAULT NULL,
   `createDate` datetime DEFAULT NULL,
+  `collected` tinyint(1) NOT NULL DEFAULT 0,
+  `deleted` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `href` (`href`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8

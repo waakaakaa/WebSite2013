@@ -12,6 +12,36 @@
 		getBlogs(-1);
 	});
 
+	function rtc(value) {
+		$.post("/rtc", {
+			id : value
+		}, function(data) {
+			var c = $("#btnc" + value).attr("class");
+			if (c.indexOf("primary") < 0) {
+				$("#btnc" + value).addClass("btn-primary");
+				$("#btnc" + value).text("已收藏");
+			} else {
+				$("#btnc" + value).removeClass("btn-primary");
+				$("#btnc" + value).text("未收藏");
+			}
+		});
+	}
+
+	function rtd(value) {
+		$.post("/rtd", {
+			id : value
+		}, function(data) {
+			var c = $("#btnd" + value).attr("class");
+			if (c.indexOf("primary") < 0) {
+				$("#btnd" + value).addClass("btn-primary");
+				$("#btnd" + value).text("已删除");
+			} else {
+				$("#btnd" + value).removeClass("btn-primary");
+				$("#btnd" + value).text("未删除");
+			}
+		});
+	}
+
 	function getBlogs(page) {
 		$
 				.ajax({
@@ -25,13 +55,25 @@
 							$("#here").empty();
 							var strHTML = "";
 							for ( var i = 0; i < data.length; i++) {
-								var btn1 = "<button class='btn btn-mini' type='button'>未收藏</button>";
+								var btn1 = "<button id='btnc"
+										+ $(data).get(i).id
+										+ "' onclick='javascript:rtc("
+										+ $(data).get(i).id
+										+ ");' class='btn btn-mini";
 								if ($(data).get(i).collected == 1) {
-									btn1 = "<button class='btn btn-mini btn-primary' type='button'>已收藏</button>";
+									btn1 += " btn-primary' type='button'>已收藏</button>";
+								} else {
+									btn1 += "' type='button'>未收藏</button>";
 								}
-								var btn2 = "<button class='btn btn-mini' type='button'>未删除</button>";
+								var btn2 = "<button id='btnd"
+										+ $(data).get(i).id
+										+ "' onclick='javascript:rtd("
+										+ $(data).get(i).id
+										+ ");' class='btn btn-mini";
 								if ($(data).get(i).deleted == 1) {
-									btn2 = "<button class='btn btn-mini btn-primary' type='button'>已删除</button>";
+									btn2 += " btn-primary' type='button'>已删除</button>";
+								} else {
+									btn2 += "' type='button'>未删除</button>";
 								}
 								strHTML += "<tr><td><a href='http://www.zju88.org/agent/"
 										+ $(data).get(i).href
