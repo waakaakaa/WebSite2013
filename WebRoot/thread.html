@@ -10,12 +10,23 @@
 <script type="text/javascript">
 	$(function($) {
 		getBlogs(-1);
+		$("#viewa").click(function() {
+			getBlogs(-1);
+		});
+		$("#viewc").click(function() {
+			getBlogs(-2);
+		});
+		$("#viewd").click(function() {
+			getBlogs(-3);
+		});
 	});
 
 	function rtc(value) {
+		$("#btnc" + value).addClass("disabled");
 		$.post("/rtc", {
 			id : value
 		}, function(data) {
+			$("#btnc" + value).removeClass("disabled");
 			var c = $("#btnc" + value).attr("class");
 			if (c.indexOf("primary") < 0) {
 				$("#btnc" + value).addClass("btn-primary");
@@ -28,9 +39,11 @@
 	}
 
 	function rtd(value) {
+		$("#btnd" + value).addClass("disabled");
 		$.post("/rtd", {
 			id : value
 		}, function(data) {
+			$("#btnd" + value).removeClass("disabled");
 			var c = $("#btnd" + value).attr("class");
 			if (c.indexOf("primary") < 0) {
 				$("#btnd" + value).addClass("btn-primary");
@@ -108,6 +121,14 @@
 
 	<div class="container jump">
 		<div class="row">
+			<div>
+				<button id="viewa" class="btn btn-info" type="button">查看全部</button>
+				&nbsp
+				<button id="viewc" class="btn btn-info" type="button">只看收藏</button>
+				&nbsp
+				<button id="viewd" class="btn btn-info" type="button">已删除</button>
+			</div>
+			<br />
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>

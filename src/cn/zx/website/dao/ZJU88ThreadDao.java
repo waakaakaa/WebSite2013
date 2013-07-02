@@ -22,4 +22,8 @@ public interface ZJU88ThreadDao {
 
 	ZJU88Thread readById(int id);
 
+	List<ZJU88Thread> getAllDeletedWorkThreads();
+
+	List<ZJU88Thread> getAllCollectedWorkThreads();
+
 }

@@ -123,34 +123,30 @@
 
 	<div class="container jump">
 		<div class="row">
-			<div class="span1"></div>
-			<div class="span10">
-				<section id="blog-editor">
-					<form action="addblog" method="post">
-						<fieldset>
-							<textarea id="content" name="content" class="input-block-level"
-								rows="3"></textarea>
-							<button type="submit" class="btn btn-primary">Save</button>
-							<button type="button" class="btn" id="search">Search</button>
-							<button type="button" class="btn" id="hourstat">HourStat</button>
-						</fieldset>
-					</form>
-				</section>
+			<section id="blog-editor">
+				<form action="addblog" method="post">
+					<fieldset>
+						<textarea id="content" name="content" class="input-block-level"
+							rows="3"></textarea>
+						<button type="submit" class="btn btn-primary">Save</button>
+						<button type="button" class="btn" id="search">Search</button>
+						<button type="button" class="btn" id="hourstat">HourStat</button>
+					</fieldset>
+				</form>
+			</section>
 
-				<div class="blog-content"></div>
-				<canvas id="myChart" width="1000" height="600"></canvas>
-				<div id="page"
-					class="pagination pagination-large pagination-centered">
-					<ul>
-						<li><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-					</ul>
-				</div>
+			<div class="blog-content"></div>
+			<canvas id="myChart" width="1000" height="600"></canvas>
+			<div id="page"
+				class="pagination pagination-large pagination-centered">
+				<ul>
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+				</ul>
 			</div>
-			<div class="span1"></div>
 		</div>
 	</div>
 </body>

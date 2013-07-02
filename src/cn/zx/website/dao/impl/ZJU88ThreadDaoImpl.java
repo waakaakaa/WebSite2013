@@ -17,9 +17,21 @@ public class ZJU88ThreadDaoImpl implements ZJU88ThreadDao {
 
 	@Override
 	public List<ZJU88Thread> getAllWorkThreads() {
-		String sql = "SELECT * FROM zju88_work_thread ORDER BY createDate DESC";
+		String sql = "SELECT * FROM zju88_work_thread WHERE deleted=0 ORDER BY createDate DESC";
 		return QueryHelper.query(ZJU88Thread.class, sql, null);
 	}
+	
+	@Override
+	public List<ZJU88Thread> getAllCollectedWorkThreads() {
+		String sql = "SELECT * FROM zju88_work_thread WHERE collected=1 ORDER BY createDate DESC";
+		return QueryHelper.query(ZJU88Thread.class, sql, null);
+	} 
+	
+	@Override
+	public List<ZJU88Thread> getAllDeletedWorkThreads() {
+		String sql = "SELECT * FROM zju88_work_thread WHERE deleted=1 ORDER BY createDate DESC";
+		return QueryHelper.query(ZJU88Thread.class, sql, null);
+	} 
 
 	@Override
 	public List<ZJU88Thread> getWorkThreads(int page) {
