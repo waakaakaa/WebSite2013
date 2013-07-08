@@ -8,6 +8,4 @@ public interface WeatherDao {
 	public List<Weather> getWeathersInOneDay();
 
 	public List<Weather> getWeathersOfHangzhouInOneDay();
-
-	public void createHz(Weather weather);
 }

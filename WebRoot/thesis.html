@@ -102,16 +102,12 @@
 		var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
 		treeObj.expandAll(true);
 		$("#btnbtn").click(function() {
-			getNodes();
+			var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+			var nodes = treeObj.getNodes();
+			$("#result").text("");
+			$("#result").text(JSON.stringify(nodes));
 		});
 	});
-
-	function getNodes() {
-		var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
-		var nodes = treeObj.getNodes();
-		$("#result").text("");
-		$("#result").text(JSON.stringify(nodes));
-	}
 </SCRIPT>
 <title>Thesis</title>
 </head>

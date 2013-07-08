@@ -50,10 +50,11 @@
 
 	function searchBlog(keyword) {
 		$.ajax({
-			type : "GET",
+			type : "POST",
 			url : "/searchblog",
 			data : "keyword=" + keyword,
 			dataType : "json",
+			contentType : "application/x-www-form-urlencoded; charset=utf8",
 			cache : false,
 			success : function(data) {
 				$(".blog-content").empty();

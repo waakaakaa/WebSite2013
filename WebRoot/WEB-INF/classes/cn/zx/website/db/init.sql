@@ -1,7 +1,4 @@
 DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS blog;
-DROP TABLE IF EXISTS weather;
-
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(50) NOT NULL,
@@ -9,6 +6,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
+DROP TABLE IF EXISTS blog;
 CREATE TABLE `blog` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `createDate` datetime DEFAULT NULL,
@@ -16,6 +14,7 @@ CREATE TABLE `blog` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
+DROP TABLE IF EXISTS weather;
 CREATE TABLE `weather` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `createDate` datetime DEFAULT NULL,
@@ -24,6 +23,7 @@ CREATE TABLE `weather` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
+DROP TABLE IF EXISTS weather_hz;
 CREATE TABLE `weather_hz` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `createDate` datetime DEFAULT NULL,
@@ -33,6 +33,7 @@ CREATE TABLE `weather_hz` (
   UNIQUE KEY `createDate` (`createDate`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
+DROP TABLE IF EXISTS zju88_work_thread;
 CREATE TABLE `zju88_work_thread` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) DEFAULT NULL,
@@ -43,3 +44,28 @@ CREATE TABLE `zju88_work_thread` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `href` (`href`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+DROP TABLE IF EXISTS thesis_head;
+CREATE TABLE `thesis_head` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `classification` varchar(5) DEFAULT NULL,
+  `serialnumber` varchar(5) DEFAULT NULL,
+  `PersonalID` varchar(8) DEFAULT NULL,
+  `title` varchar(20) DEFAULT NULL,
+  `titletl` varchar(20) DEFAULT NULL,
+  `Etitle` varchar(50) DEFAULT NULL,
+  `Etitletl` varchar(50) DEFAULT NULL,
+  `author` varchar(3) DEFAULT NULL,
+  `degree` varchar(2) DEFAULT NULL,
+  `supervisor` varchar(3) DEFAULT NULL,
+  `major` varchar(10) DEFAULT NULL,
+  `researchdm` varchar(10) DEFAULT NULL,
+  `institute` varchar(10) DEFAULT NULL,
+  `submitdate` varchar(11) DEFAULT NULL,
+  `defenddate` varchar(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+DROP TABLE IF EXISTS thesis_body;
+DROP TABLE IF EXISTS thesis_img;
+DROP TABLE IF EXISTS thesis_ref;
