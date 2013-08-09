@@ -12,29 +12,19 @@ document.write('<a class="brand" href="/">X. Zhang\'s Website</a>');
 document.write('<div class="nav-collapse collapse">');
 document.write('<ul class="nav">');
 document.write('<li><a href="/logout">Logout</a></li>');
-if (url.indexOf('html') < 0) {
+if (url.indexOf('html') < 0 || url.indexOf('/index.html') > 0) {
 	document.write('<li class="active"><a href="/">Index</a></li>');
 } else {
 	document.write('<li><a href="/">Index</a></li>');
-}
-if (url.indexOf('/agenda.html') > 0) {
-	document.write('<li class="active"><a href="/agenda.html">Agenda</a></li>');
-} else {
-	document.write('<li><a href="/agenda.html">Agenda</a></li>');
-}
-if (url.indexOf('/thesis.html') > 0) {
-	document.write('<li class="active"><a href="/thesis.html">Thesis</a></li>');
-} else {
-	document.write('<li><a href="/thesis.html">Thesis</a></li>');
 }
 if (url.indexOf('/blog.html') > 0) {
 	document.write('<li class="active"><a href="/blog.html">Blog</a></li>');
 } else {
 	document.write('<li><a href="/blog.html">Blog</a></li>');
 }
-if (url.indexOf('/thread.html') > 0) {
-	document.write('<li class="active"><a href="/thread.html">Thread</a></li>');
+if (url.indexOf('/88work.html') > 0) {
+	document.write('<li class="active"><a href="/88work.html">88work</a></li>');
 } else {
-	document.write('<li><a href="/thread.html">Thread</a></li>');
+	document.write('<li><a href="/88work.html">88work</a></li>');
 }
 document.write('</ul></div></div></div></div>');
