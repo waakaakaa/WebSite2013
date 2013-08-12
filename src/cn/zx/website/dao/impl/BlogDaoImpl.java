@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.CorruptIndexException;
@@ -38,7 +36,6 @@ public class BlogDaoImpl implements BlogDao {
 	public static final String FIELD_CONTENT = "content";
 	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm:ss");
-	private final static Log log = LogFactory.getLog(BlogDaoImpl.class);
 
 	@Override
 	public void create(Blog blog) {
@@ -49,13 +46,13 @@ public class BlogDaoImpl implements BlogDao {
 
 	public List<Blog> findAllBlogs() {
 		String sql = "SELECT * FROM blog";
-		return QueryHelper.query(Blog.class, sql, null);
+		return QueryHelper.query(Blog.class, sql, (Object[]) null);
 	}
 
 	public List<Blog> findBlogs(int page) {
 		String sql = "SELECT * FROM blog ORDER BY createDate DESC";
 		return QueryHelper.query_slice(Blog.class, sql, page,
-				Constants.BLOG_PAGE_COUNT, null);
+				Constants.BLOG_PAGE_COUNT, (Object[]) null);
 	}
 
 	@Override

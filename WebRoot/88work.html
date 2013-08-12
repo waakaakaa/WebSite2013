@@ -23,7 +23,7 @@
 
 	function rtc(value) {
 		$("#btnc" + value).addClass("disabled");
-		$.post("/rtc", {
+		$.post("/work88/rtc", {
 			id : value
 		}, function(data) {
 			$("#btnc" + value).removeClass("disabled");
@@ -40,7 +40,7 @@
 
 	function rtd(value) {
 		$("#btnd" + value).addClass("disabled");
-		$.post("/rtd", {
+		$.post("/work88/rtd", {
 			id : value
 		}, function(data) {
 			$("#btnd" + value).removeClass("disabled");
@@ -59,7 +59,7 @@
 		$
 				.ajax({
 					type : "GET",
-					url : "/get88workthread",
+					url : "/work88/get",
 					data : "page=" + page,
 					dataType : "json",
 					cache : false,

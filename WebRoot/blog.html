@@ -24,7 +24,7 @@
 	function searchBlog(keyword) {
 		$.ajax({
 			type : "POST",
-			url : "/searchblog",
+			url : "/blog/search",
 			data : "keyword=" + keyword,
 			dataType : "json",
 			contentType : "application/x-www-form-urlencoded; charset=utf8",
@@ -56,7 +56,7 @@
 	function getBlogs(page) {
 		$.ajax({
 			type : "GET",
-			url : "/getblog",
+			url : "/blog/get",
 			data : "page=" + page,
 			dataType : "json",
 			cache : false,
@@ -98,7 +98,7 @@
 	<div class="container jump">
 		<div class="row">
 			<section id="blog-editor">
-				<form action="addblog" method="post">
+				<form action="blog/add" method="post">
 					<fieldset>
 						<textarea id="content" name="content" class="input-block-level"
 							rows="3"></textarea>

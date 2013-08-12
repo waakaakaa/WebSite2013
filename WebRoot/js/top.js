@@ -11,7 +11,7 @@ document.write('</button>');
 document.write('<a class="brand" href="/">X. Zhang\'s Website</a>');
 document.write('<div class="nav-collapse collapse">');
 document.write('<ul class="nav">');
-document.write('<li><a href="/logout">Logout</a></li>');
+document.write('<li><a href="/user/logout">Logout</a></li>');
 if (url.indexOf('html') < 0 || url.indexOf('/index.html') > 0) {
 	document.write('<li class="active"><a href="/">Index</a></li>');
 } else {

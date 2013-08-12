@@ -14,16 +14,16 @@
 	$(function() {
 		getSysInfo();
 		plotWeather();
-		getWeather("/getweather", 0);
-		getWeather("/getweatherhz", 1);
-		getWeather("/getweathercd", 2);
-		getWeather("/getweathersz", 3);
-		getWeather("/getweatherwh", 4);
+		getWeather("/weather/d", 0);
+		getWeather("/weather/hz", 1);
+		getWeather("/weather/cd", 2);
+		getWeather("/weather/sz", 3);
+		getWeather("/weather/wh", 4);
 	});
 	function getSysInfo() {
 		$.ajax({
 			type : "GET",
-			url : "/sys",
+			url : "/sys/get",
 			dataType : "json",
 			cache : false,
 			success : function(data) {
@@ -177,8 +177,8 @@
 			<p class="text-right lead">
 				board temperature:<span id="temp" class="text-error"></span>℃ CPU:<span
 					id=cpu class="text-error"></span>% memory:<span id="mu"
-					class="text-error"></span>/<span id="mt"></span> swap:<span
-					id="su" class="text-error"></span>/<span id="st"></span>
+					class="text-error"></span>/<span id="mt"></span> swap:<span id="su"
+					class="text-error"></span>/<span id="st"></span>
 			</p>
 			<div id="temperature"></div>
 			<div id="humidity"></div>
