@@ -61,4 +61,13 @@ public class Work88Action extends Action {
 			work88Dao.updateDeleted(id);
 		}
 	}
+
+	@ActionUrl(path = "/work88/search")
+	public void search(HttpServletRequest req, HttpServletResponse resp)
+			throws IOException {
+		String keyword = req.getParameter("keyword");
+		log.info("keyword = " + keyword);
+		List<Work88> list = work88Dao.searchWork88(keyword);
+		sendJSONArrayFromObject(list, resp);
+	}
 }

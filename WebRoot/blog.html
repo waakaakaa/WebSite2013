@@ -30,27 +30,29 @@
 			contentType : "application/x-www-form-urlencoded; charset=utf8",
 			cache : false,
 			success : function(data) {
-				$(".blog-content").empty();
-				var strHTML = "";
-				if ($(data).length == 0) {
-					strHTML += "<div>No blog found!</div>";
-				} else {
-					for ( var i = 0; i < data.length; i++) {
-						strHTML += "<p class='label label-success'>"
-								+ ($(data).get(i).createDate.year + 1900) + "年"
-								+ ($(data).get(i).createDate.month + 1) + "月"
-								+ $(data).get(i).createDate.date + "日"
-								+ $(data).get(i).createDate.hours + "点"
-								+ $(data).get(i).createDate.minutes + "分"
-								+ $(data).get(i).createDate.seconds + "秒"
-								+ "</p>";
-						strHTML += "<p>" + $(data).get(i).content
-								+ "</p></div>";
-					}
-				}
-				$(".blog-content").html(strHTML);
+				fillData(data);
 			}
 		});
+	}
+
+	function fillData(data) {
+		$(".blog-content").empty();
+		var strHTML = "";
+		if ($(data).length == 0) {
+			strHTML += "<div>No blog found!</div>";
+		} else {
+			for ( var i = 0; i < data.length; i++) {
+				strHTML += "<p class='label label-success'>"
+						+ ($(data).get(i).createDate.year + 1900) + "年"
+						+ ($(data).get(i).createDate.month + 1) + "月"
+						+ $(data).get(i).createDate.date + "日"
+						+ $(data).get(i).createDate.hours + "点"
+						+ $(data).get(i).createDate.minutes + "分"
+						+ $(data).get(i).createDate.seconds + "秒" + "</p>";
+				strHTML += "<p>" + $(data).get(i).content + "</p></div>";
+			}
+		}
+		$(".blog-content").html(strHTML);
 	}
 
 	function getBlogs(page) {
@@ -61,25 +63,7 @@
 			dataType : "json",
 			cache : false,
 			success : function(data) {
-				$(".blog-content").empty();
-				var strHTML = "";
-				if ($(data).length == 0) {
-					strHTML += "<div>No blog yet!</div>";
-				} else {
-					for ( var i = 0; i < data.length; i++) {
-						strHTML += "<p class='label label-success'>"
-								+ ($(data).get(i).createDate.year + 1900) + "年"
-								+ ($(data).get(i).createDate.month + 1) + "月"
-								+ $(data).get(i).createDate.date + "日"
-								+ $(data).get(i).createDate.hours + "点"
-								+ $(data).get(i).createDate.minutes + "分"
-								+ $(data).get(i).createDate.seconds + "秒"
-								+ "</p>";
-						strHTML += "<p>" + $(data).get(i).content
-								+ "</p></div>";
-					}
-				}
-				$(".blog-content").html(strHTML);
+				fillData(data);
 			}
 		});
 		for ( var j = 1; j <= 5; j++) {

@@ -9,15 +9,18 @@
 <title>Thread</title>
 <script type="text/javascript">
 	$(function($) {
-		getBlogs(-1);
+		getwork88(-1);
 		$("#viewa").click(function() {
-			getBlogs(-1);
+			getwork88(-1);
 		});
 		$("#viewc").click(function() {
-			getBlogs(-2);
+			getwork88(-2);
 		});
 		$("#viewd").click(function() {
-			getBlogs(-3);
+			getwork88(-3);
+		});
+		$("#btn_search").click(function() {
+			searchwork88($("#txt_search").val());
 		});
 	});
 
@@ -55,63 +58,75 @@
 		});
 	}
 
-	function getBlogs(page) {
-		$
-				.ajax({
-					type : "GET",
-					url : "/work88/get",
-					data : "page=" + page,
-					dataType : "json",
-					cache : false,
-					success : function(data) {
-						if ($(data).length > 0) {
-							$("#here").empty();
-							var strHTML = "";
-							for ( var i = 0; i < data.length; i++) {
-								var btn1 = "<button id='btnc"
-										+ $(data).get(i).id
-										+ "' onclick='javascript:rtc("
-										+ $(data).get(i).id
-										+ ");' class='btn btn-mini";
-								if ($(data).get(i).collected == 1) {
-									btn1 += " btn-primary' type='button'>已收藏</button>";
-								} else {
-									btn1 += "' type='button'>未收藏</button>";
-								}
-								var btn2 = "<button id='btnd"
-										+ $(data).get(i).id
-										+ "' onclick='javascript:rtd("
-										+ $(data).get(i).id
-										+ ");' class='btn btn-mini";
-								if ($(data).get(i).deleted == 1) {
-									btn2 += " btn-primary' type='button'>已删除</button>";
-								} else {
-									btn2 += "' type='button'>未删除</button>";
-								}
-								strHTML += "<tr><td><a href='http://www.zju88.org/agent/"
-										+ $(data).get(i).href
-										+ "' target='_blank'>"
-										+ $(data).get(i).title
-										+ "</td><td>"
-										+ ($(data).get(i).createDate.year + 1900)
-										+ "-"
-										+ ($(data).get(i).createDate.month + 1)
-										+ "-"
-										+ $(data).get(i).createDate.date
-										+ " "
-										+ $(data).get(i).createDate.hours
-										+ ":"
-										+ $(data).get(i).createDate.minutes
-										+ "</td><td>"
-										+ btn1
-										+ "&nbsp"
-										+ btn2
-										+ "</td></tr>";
-							}
-							$("#here").html(strHTML);
+	function getwork88(page) {
+		$("#here").empty();
+		$("#status").html("查询中");
+		$.ajax({
+			type : "GET",
+			url : "/work88/get",
+			data : "page=" + page,
+			dataType : "json",
+			cache : false,
+			success : function(data) {
+				fillData(data);
+			}
+		});
+	}
+
+	function searchwork88(keyword) {
+		if (!keyword || !$.trim(keyword)) {
+			alert("不能为空");
+		} else {
+			$("#here").empty();
+			$("#status").html("搜索中");
+			$
+					.ajax({
+						type : "POST",
+						url : "/work88/search",
+						data : "keyword=" + keyword,
+						dataType : "json",
+						contentType : "application/x-www-form-urlencoded; charset=utf8",
+						cache : false,
+						success : function(data) {
+							fillData(data);
 						}
-					}
-				});
+					});
+		}
+	}
+
+	function fillData(data) {
+		if ($(data).length > 0) {
+			var strHTML = "";
+			for ( var i = 0; i < data.length; i++) {
+				var btn1 = "<button id='btnc" + $(data).get(i).id
+						+ "' onclick='javascript:rtc(" + $(data).get(i).id
+						+ ");' class='btn btn-mini";
+				if ($(data).get(i).collected == 1) {
+					btn1 += " btn-primary' type='button'>已收藏</button>";
+				} else {
+					btn1 += "' type='button'>未收藏</button>";
+				}
+				var btn2 = "<button id='btnd" + $(data).get(i).id
+						+ "' onclick='javascript:rtd(" + $(data).get(i).id
+						+ ");' class='btn btn-mini";
+				if ($(data).get(i).deleted == 1) {
+					btn2 += " btn-primary' type='button'>已删除</button>";
+				} else {
+					btn2 += "' type='button'>未删除</button>";
+				}
+				strHTML += "<tr><td><a href='http://www.zju88.org/agent/"
+						+ $(data).get(i).href + "' target='_blank'>"
+						+ $(data).get(i).title + "</td><td>"
+						+ ($(data).get(i).createDate.year + 1900) + "-"
+						+ ($(data).get(i).createDate.month + 1) + "-"
+						+ $(data).get(i).createDate.date + " "
+						+ $(data).get(i).createDate.hours + ":"
+						+ $(data).get(i).createDate.minutes + "</td><td>"
+						+ btn1 + "&nbsp" + btn2 + "</td></tr>";
+			}
+			$("#here").html(strHTML);
+		}
+		$("#status").empty();
 	}
 </script>
 </head>
@@ -121,15 +136,14 @@
 
 	<div class="container jump">
 		<div class="row">
-			<div>
+			<form class="form-inline">
 				<button id="viewa" class="btn btn-info" type="button">查看全部</button>
-				&nbsp;
 				<button id="viewc" class="btn btn-info" type="button">只看收藏</button>
-				&nbsp;
 				<button id="viewd" class="btn btn-info" type="button">已删除</button>
-			</div>
-			<br />
-			<table class="table table-bordered table-striped">
+				<button id="btn_search" class="btn" type="button">搜索</button>
+				<input id="txt_search" type="text" placeholder="搜索主题……" />
+			</form>
+			<table class="table table-bordered table-striped table-hover">
 				<thead>
 					<tr>
 						<th>主题</th>
@@ -140,6 +154,7 @@
 				<tbody id="here">
 				</tbody>
 			</table>
+			<div id="status"></div>
 		</div>
 	</div>
 </body>

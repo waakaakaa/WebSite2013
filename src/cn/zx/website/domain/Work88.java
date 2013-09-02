@@ -20,6 +20,16 @@ public class Work88 {
 		this.createDate = timestamp;
 	}
 
+	public Work88(int id, String title, String href, Timestamp createDate,
+			boolean collected, boolean deleted) {
+		this.id = id;
+		this.title = title;
+		this.href = href;
+		this.createDate = createDate;
+		this.collected = collected;
+		this.deleted = deleted;
+	}
+
 	public int getId() {
 		return id;
 	}

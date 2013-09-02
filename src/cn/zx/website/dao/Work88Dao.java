@@ -24,4 +24,6 @@ public interface Work88Dao {
 
 	List<Work88> getAllCollectedWorkThreads();
 
+	List<Work88> searchWork88(String keyword);
+
 }
