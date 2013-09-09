@@ -12,14 +12,18 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.zx.website.db.DBManager;
 import cn.zx.website.util.Constants;
 
 @WebFilter(urlPatterns = "/*")
-public class UserFilter implements Filter {
+public class GlobalFilter implements Filter {
 	@Override
-	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain filterChain) throws IOException, ServletException {
+	public void doFilter(ServletRequest req, ServletResponse resp,
+			FilterChain filterChain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		Object obj = request.getSession().getAttribute(Constants.SESSION_USER);
 		String uri = request.getRequestURI();
 		if (uri.contains("/login") || uri.equals("/img/ali.jpg") || obj != null) {
@@ -27,6 +31,7 @@ public class UserFilter implements Filter {
 		} else {
 			response.sendRedirect("/login.html");
 		}
+		DBManager.closeConnection();
 	}
 
 	@Override

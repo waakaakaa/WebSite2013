@@ -4354,6 +4354,7 @@ public class DataStructures {
 		return true;
 	}
 
+	@SuppressWarnings("resource")
 	private static final String getTestResults(int testNumber, String[] names,
 			long[][] results) {
 		StringBuilder resultsBuilder = new StringBuilder();
@@ -4460,7 +4461,7 @@ public class DataStructures {
 						sortedRemoveTimeString, lookupTimeString, sizeString);
 			}
 		}
-
+		
 		return resultsBuilder.toString();
 	}
 

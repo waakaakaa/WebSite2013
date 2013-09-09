@@ -131,7 +131,7 @@ public class Work88DaoImpl implements Work88Dao {
 						Boolean.valueOf(targetDoc.get(FIELD_DELETED)));
 				list.add(work);
 			}
-
+			isearcher.close();
 		} catch (CorruptIndexException e) {
 			e.printStackTrace();
 		} catch (LockObtainFailedException e) {

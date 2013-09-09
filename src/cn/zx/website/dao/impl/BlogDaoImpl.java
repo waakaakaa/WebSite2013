@@ -88,7 +88,7 @@ public class BlogDaoImpl implements BlogDao {
 						.get(FIELD_DATE)), targetDoc.get(FIELD_CONTENT));
 				list.add(blog);
 			}
-
+			isearcher.close();
 		} catch (CorruptIndexException e) {
 			e.printStackTrace();
 		} catch (LockObtainFailedException e) {
