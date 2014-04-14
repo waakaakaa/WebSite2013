@@ -16,25 +16,25 @@ public class WeatherDaoImpl implements WeatherDao {
 
 	@Override
 	public List<Weather> getWeathersOfHangzhouInOneDay() {
-		String sql = "select * from weather_hz where createDate >= now()- interval 1 day";
+		String sql = "select * from weather_china where city='hangzhou' and createDate >= now()- interval 1 day";
 		return QueryHelper.query(Weather.class, sql, (Object[]) null);
 	}
 
 	@Override
 	public List<Weather> getWeathersOfChengduInOneDay() {
-		String sql = "select * from weather_cd where createDate >= now()- interval 1 day";
+		String sql = "select * from weather_china where city='chengdu' and createDate >= now()- interval 1 day";
 		return QueryHelper.query(Weather.class, sql, (Object[]) null);
 	}
 
 	@Override
 	public List<Weather> getWeathersOfShenzhenInOneDay() {
-		String sql = "select * from weather_sz where createDate >= now()- interval 1 day";
+		String sql = "select * from weather_china where city='shenzhen' and createDate >= now()- interval 1 day";
 		return QueryHelper.query(Weather.class, sql, (Object[]) null);
 	}
 
 	@Override
 	public List<Weather> getWeathersOfWuhanInOneDay() {
-		String sql = "select * from weather_wh where createDate >= now()- interval 1 day";
+		String sql = "select * from weather_china where city='wuhan' and createDate >= now()- interval 1 day";
 		return QueryHelper.query(Weather.class, sql, (Object[]) null);
 	}
 
