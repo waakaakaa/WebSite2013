@@ -7,21 +7,21 @@
 
 	<schedule>
 		<job>
-			<name>my-very-clever-job</name>
-			<group>MYJOB_GROUP</group>
+			<name>my-very-clever-job2</name>
+			<group>MYJOB_GROUP2</group>
 
-			<description>The job description</description>
-			<job-class>cn.zx.website.quartz.test.HelloJob</job-class>
+			<description>The job description2</description>
+			<job-class>cn.zx.website.quartz.test.HelloJob2</job-class>
 		</job>
 
 		<trigger>
 			<cron>
-				<name>my-trigger</name>
-				<group>MYTRIGGER_GROUP</group>
-				<job-name>my-very-clever-job</job-name>
+				<name>my-trigger2</name>
+				<group>MYTRIGGER_GROUP2</group>
+				<job-name>my-very-clever-job2</job-name>
 
-				<job-group>MYJOB_GROUP</job-group>
-				<cron-expression>0 0/1 * * * ?</cron-expression>
+				<job-group>MYJOB_GROUP2</job-group>
+				<cron-expression>30 5/20 * * * ?</cron-expression>
 			</cron>
 		</trigger>
 	</schedule>

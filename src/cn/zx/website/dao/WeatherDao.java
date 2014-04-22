@@ -14,4 +14,8 @@ public interface WeatherDao {
 	public List<Weather> getWeathersOfShenzhenInOneDay();
 
 	public List<Weather> getWeathersOfWuhanInOneDay();
+
+	public List<Weather> getWeather(String city);
+
+	public void createCityWeather(Weather weather, String city);
 }

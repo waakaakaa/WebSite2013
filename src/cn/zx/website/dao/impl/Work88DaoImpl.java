@@ -36,8 +36,7 @@ public class Work88DaoImpl implements Work88Dao {
 	public static final String FIELD_HREF = "href";
 	public static final String FIELD_COLLECTED = "collected";
 	public static final String FIELD_DELETED = "deleted";
-	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(
-			"yyyy-MM-dd HH:mm:ss");
+	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	@Override
 	public List<Work88> getAllWorkThreads() {
@@ -60,8 +59,7 @@ public class Work88DaoImpl implements Work88Dao {
 	@Override
 	public List<Work88> getWorkThreads(int page) {
 		String sql = "SELECT * FROM zju88_work_thread ORDER BY createDate DESC";
-		return QueryHelper.query_slice(Work88.class, sql, page,
-				Constants.WORK_THREAD_PAGE_COUNT, (Object[]) null);
+		return QueryHelper.query_slice(Work88.class, sql, page, Constants.WORK_THREAD_PAGE_COUNT, (Object[]) null);
 	}
 
 	@Override
@@ -111,8 +109,7 @@ public class Work88DaoImpl implements Work88Dao {
 			isearcher = new IndexSearcher(ireader);
 
 			// 使用QueryParser查询分析器构造Query对象
-			QueryParser qp = new QueryParser(Version.LUCENE_36, FIELD_TITLE,
-					analyzer);
+			QueryParser qp = new QueryParser(Version.LUCENE_36, FIELD_TITLE, analyzer);
 			qp.setDefaultOperator(QueryParser.AND_OPERATOR);
 			Query query = qp.parse(keyword);
 
@@ -123,12 +120,8 @@ public class Work88DaoImpl implements Work88Dao {
 			ScoreDoc[] scoreDocs = topDocs.scoreDocs;
 			for (int i = 0; i < topDocs.totalHits; i++) {
 				Document targetDoc = isearcher.doc(scoreDocs[i].doc);
-				Work88 work = new Work88(Integer.valueOf(targetDoc
-						.get(FIELD_ID)), targetDoc.get(FIELD_TITLE),
-						targetDoc.get(FIELD_HREF), Timestamp.valueOf(targetDoc
-								.get(FIELD_DATE)), Boolean.valueOf(targetDoc
-								.get(FIELD_COLLECTED)),
-						Boolean.valueOf(targetDoc.get(FIELD_DELETED)));
+				Work88 work = new Work88(Integer.valueOf(targetDoc.get(FIELD_ID)), targetDoc.get(FIELD_TITLE), targetDoc.get(FIELD_HREF), Timestamp.valueOf(targetDoc.get(FIELD_DATE)),
+						Boolean.valueOf(targetDoc.get(FIELD_COLLECTED)), Boolean.valueOf(targetDoc.get(FIELD_DELETED)));
 				list.add(work);
 			}
 			isearcher.close();
@@ -157,5 +150,11 @@ public class Work88DaoImpl implements Work88Dao {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public void createWorkThread(Work88 thread) {
+		String sql = "INSERT INTO zju88_work_thread(title,href,createDate) VALUES(?,?,?)";
+		QueryHelper.update(sql, thread.getTitle(), thread.getHref(), thread.getCreateDate());
 	}
 }

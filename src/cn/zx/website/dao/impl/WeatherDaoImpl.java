@@ -38,4 +38,16 @@ public class WeatherDaoImpl implements WeatherDao {
 		return QueryHelper.query(Weather.class, sql, (Object[]) null);
 	}
 
+	@Override
+	public List<Weather> getWeather(String city) {
+		String sql = "select * from weather_china where city='" + city + "' and createDate >= now()- interval 1 day";
+		return QueryHelper.query(Weather.class, sql, (Object[]) null);
+	}
+
+	@Override
+	public void createCityWeather(Weather weather, String city) {
+		String sql = "INSERT INTO weather_china (createDate,humidity,temperature,city) VALUES(?,?,?,?)";
+		QueryHelper.update(sql, weather.getCreateDate(), weather.getHumidity(), weather.getTemperature(), city);
+	}
+
 }

@@ -18,10 +18,10 @@
 		getSysInfo();
 		plotWeather();
 		getWeather("/weather/d", 0);
-		getWeather("/weather/hz", 1);
-		getWeather("/weather/cd", 2);
-		getWeather("/weather/sz", 3);
-		getWeather("/weather/wh", 4);
+		getWeather("/weather/get?city=hangzhou", 1);
+		getWeather("/weather/get?city=chengdu", 2);
+		getWeather("/weather/get?city=shenzhen", 3);
+		getWeather("/weather/get?city=wuhan", 4);
 	});
 	function getSysInfo() {
 		$.ajax({

@@ -26,4 +26,6 @@ public interface Work88Dao {
 
 	List<Work88> searchWork88(String keyword);
 
+	void createWorkThread(Work88 thread);
+
 }
