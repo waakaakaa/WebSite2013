@@ -36,7 +36,7 @@ public class HttpUtils {
 			connection.setReadTimeout(15000);
 			connection.setInstanceFollowRedirects(true);
 			connection.connect();
-			BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "GBK"));
 			String line = null;
 			while ((line = br.readLine()) != null) {
 				sb.append(line + "\n");
