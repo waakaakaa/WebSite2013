@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cn.zx.website.db.DBManager;
 import cn.zx.website.util.Constants;
 
 @WebFilter(urlPatterns = "/*")
@@ -37,7 +36,6 @@ public class GlobalFilter implements Filter {
 			log.info("response.sendRedirect('/login.html');");
 			response.sendRedirect("/login.html");
 		}
-		DBManager.closeConnection();
 	}
 
 	@Override

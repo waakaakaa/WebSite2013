@@ -14,7 +14,8 @@ public class QueryHelper {
 
 	public static Connection getConnection() {
 		try {
-			return DBManager.getConnection();
+			return SimpleDBManager.getConnection();
+			// return DBManager.getConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

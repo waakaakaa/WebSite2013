@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -16,12 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cn.zx.website.annotation.ActionUrl;
-import cn.zx.website.db.DBManager;
 import cn.zx.website.util.ReflectionTool;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = { "/blog/*", "/user/*", "/weather/*", "/work88/*",
-		"/sys/*" }, loadOnStartup = 3)
+@WebServlet(urlPatterns = { "/blog/*", "/user/*", "/weather/*", "/work88/*", "/sys/*" }, loadOnStartup = 3)
 public class DispatchServlet extends HttpServlet {
 	private static final String BASE_PACKAGE = "cn.zx.website.action";
 	private static Map<String, String> classMap = new HashMap<>();
@@ -43,30 +40,27 @@ public class DispatchServlet extends HttpServlet {
 		}
 		System.out.println(classMap);
 		System.out.println(methodMap);
-		try {
-			DBManager.getConnection();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		// try {
+		// DBManager.getConnection();
+		// } catch (SQLException e) {
+		// e.printStackTrace();
+		// }
 		System.out.println("----------------- init ends -----------------");
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doPost(req, resp);
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uri = req.getRequestURI();
 		if (classMap.containsKey(uri)) {
 			try {
 				Class<?> c = Class.forName(classMap.get(uri));
 				Object object = c.newInstance();
-				Method m = c.getMethod(methodMap.get(uri),
-						HttpServletRequest.class, HttpServletResponse.class);
+				Method m = c.getMethod(methodMap.get(uri), HttpServletRequest.class, HttpServletResponse.class);
 				m.invoke(object, req, resp);
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
